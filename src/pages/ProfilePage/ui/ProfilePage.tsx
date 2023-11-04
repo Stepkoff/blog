@@ -24,9 +24,9 @@ const ProfilePage = ({ className }: ProfilePageProps) => {
     // const error = useSelector(getProfileError);
     // const data = useSelector(getProfileData);
 
-    useEffect(() => {
-        dispatch(fetchProfileData());
-    }, [dispatch]);
+    // useEffect(() => {
+    //     dispatch(fetchProfileData());
+    // }, [dispatch]);
 
     return (
         <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
