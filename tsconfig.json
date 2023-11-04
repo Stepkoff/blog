@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    // highlight places with no type
+    "noImplicitAny": true,
+    "module": "ESNext",
+    // target es standard
+    "target": "es5",
+    "jsx": "react-jsx",
+    // allows the compiler to process not only ts file but also js
+    "allowJs": true,
+    "strict": true,
+    "moduleResolution": "node",
+    // absolute imports
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    // esModuleInterop allow to work with packages which use common js ( require() module.exports )
+    "esModuleInterop": true,
+    // allow us to use simple imports like (import react from 'react')
+    // instead of ( import * as react from 'react') if library doesn't support default imports
+    "allowSyntheticDefaultImports": true,
+//    "sourceMap": true,
+//    "isolatedModules": true
+  },
+  "exclude": ["cypress.config.ts", "node_modules"],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  },
+  "include": [
+    "./config/jest/setupTests.ts",
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+//    "*.config.ts"
+  ]
+}
