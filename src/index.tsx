@@ -1,26 +1,37 @@
-import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import { ThemeProvider } from '@/app/providers/ThemeProvider';
-import { App } from '@/app/App';
-import '@/shared/config/i18n/i18n';
-import { ErrorBoundary } from '@/app/providers/ErrorBoundary';
-import { PageError } from '@/widgets/PageError';
-import './app/styles/index.scss';
-import { StoreProvider } from '@/app/providers/StoreProvider';
+import '@/app/styles/index.scss';
+import './shared/config/i18n/i18n';
+import {StrictMode} from "react";
+import {BrowserRouter } from "react-router-dom";
+import { StoreProvider } from "@/app/providers/StoreProvider";
+import { ErrorBoundary } from "@/app/providers/ErrorBoundary";
+import { ForceUpdateProvider } from "@/shared/lib/render/forceUpdate";
+import { ThemeProvider } from "@/app/providers/ThemeProvider";
+import App from "@/app/App";
+import { Theme } from "@/shared/const/theme";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-    <React.StrictMode>
+const container = document.getElementById('root')!
+
+if (!container) {
+    throw new Error(
+        'Container Root is not found. App can not be mounted!',
+    );
+}
+
+
+ReactDOM.createRoot(container).render(
+    <StrictMode>
         <BrowserRouter>
             <StoreProvider>
-                <ErrorBoundary fallback={(
-                    <Suspense fallback=""><PageError /></Suspense>)}
-                >
-                    <ThemeProvider>
-                        <App />
-                    </ThemeProvider>
+                <ErrorBoundary>
+                    <ForceUpdateProvider>
+                        <ThemeProvider initialTheme={Theme.DARK}>
+                            <App />
+                        </ThemeProvider>
+                    </ForceUpdateProvider>
                 </ErrorBoundary>
             </StoreProvider>
-        </BrowserRouter>
-    </React.StrictMode>,
-);
+        </BrowserRouter>,
+    </StrictMode>
+)
+export { Theme } from '@/shared/const/theme';

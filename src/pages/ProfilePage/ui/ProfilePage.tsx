@@ -1,38 +1,25 @@
-import React, { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import { DynamicModuleLoader } from '@/shared/lib/components/DynamicModuleLoader';
-import { ReducersList } from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
-import {
-    fetchProfileData,
-    profileReducer,
-} from '@/entities/Profile';
-import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
+import { useParams } from 'react-router-dom';
+import { classNames } from '@/shared/lib/classNames/classNames';
+import { Page } from '@/widgets/Page';
+import { VStack } from '@/shared/ui/redesigned/Stack';
+import { EditableProfileCard } from '@/features/editableProfileCard';
 
 interface ProfilePageProps {
-  className?: string
+    className?: string;
 }
 
-const reducers:ReducersList = {
-    profile: profileReducer,
-};
-
 const ProfilePage = ({ className }: ProfilePageProps) => {
-    const dispatch = useAppDispatch();
-    const { t } = useTranslation('profile');
-
-    // const isLoading = useSelector(getProfileLoading);
-    // const error = useSelector(getProfileError);
-    // const data = useSelector(getProfileData);
-
-    // useEffect(() => {
-    //     dispatch(fetchProfileData());
-    // }, [dispatch]);
+    const { id } = useParams<{ id: string }>();
 
     return (
-        <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
-            <div>{t('Profile')}</div>
-            {/* <ProfileCard data={data} isLoading={isLoading} error={error} /> */}
-        </DynamicModuleLoader>
+        <Page
+            data-testid="ProfilePage"
+            className={classNames('', {}, [className])}
+        >
+            <VStack gap="16" max>
+                <EditableProfileCard id={id} />
+            </VStack>
+        </Page>
     );
 };
 

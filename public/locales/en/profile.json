@@ -1,8 +1,21 @@
 {
-  "Profile": "Profile",
-  "Edit": "Edit",
-  "First name": "First name",
-  "Last name": "Last name",
-  "Authentication failed! Try again.": "Authentication failed! Try again.",
-  "Try to refresh the page.": "Try to refresh the page."
+  "Профиль": "Profile",
+  "Редактировать": "Edit",
+  "Ваша фамилия": "Your lastname",
+  "Ваше имя": "Your name",
+  "Произошла ошибка при загрузке профиля": "Upload error",
+  "Попробуйте обновить страницу": "Try to update page",
+  "Отменить": "Cancel",
+  "Сохранить": "Save",
+  "Город": "City",
+  "Ваш возраст": "Your age",
+  "Имя пользователя": "Username",
+  "Введите имя пользователя": "Input username",
+  "Введите ссылку на аватар": "Input avatar link",
+  "Серверная ошибка при сохранении": "Server error when saving",
+  "Некорректный регион": "Invalid region",
+  "Имя и фамилия обязательны": "First and last name are required",
+  "Данные не указаны": "Data is not specified",
+  "Некорректный возраст": "Incorrect age",
+  "Профиль не найден": "Профиль не найден"
 }

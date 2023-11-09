@@ -1,63 +1,65 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
-import s from './ProfileCard.module.scss';
-import { cn } from '@/shared/lib/cn';
-import { Text, TextTheme } from '@/shared/ui/Text';
-import { Button, ButtonTheme } from '@/shared/ui/Button';
-import { Input } from '@/shared/ui/Input';
-import { Profile } from '../../model/types/profile';
-import { Loader } from '@/shared/ui/Loader';
 
-interface ProfileCardProps {
+import { Currency } from '@/entities/Currency';
+import { Country } from '@/entities/Country';
+import { Profile } from '../../model/types/profile';
+import { ToggleFeatures } from '@/shared/lib/features';
+import {
+    ProfileCardDeprecated,
+    ProfileCardDeprecatedError,
+    ProfileCardDeprecatedLoader,
+} from '../ProfileCardDeprecated/ProfileCardDeprecated';
+import {
+    ProfileCardRedesigned,
+    ProfileCardRedesignedError,
+    ProfileCardRedesignedSkeleton,
+} from '../ProfileCardRedesigned/ProfileCardRedesigned';
+
+export interface ProfileCardProps {
     className?: string;
     data?: Profile;
-    isLoading?: boolean;
     error?: string;
+    isLoading?: boolean;
+    readonly?: boolean;
+    onChangeLastname?: (value?: string) => void;
+    onChangeFirstname?: (value?: string) => void;
+    onChangeCity?: (value?: string) => void;
+    onChangeAge?: (value?: string) => void;
+    onChangeUsername?: (value?: string) => void;
+    onChangeAvatar?: (value?: string) => void;
+    onChangeCurrency?: (currency: Currency) => void;
+    onChangeCountry?: (country: Country) => void;
 }
 
-export const ProfileCard = ({
-    className, data, error, isLoading,
-}: ProfileCardProps) => {
-    const { t } = useTranslation('profile');
+export const ProfileCard = (props: ProfileCardProps) => {
+    const { isLoading, error } = props;
+    const { t } = useTranslation();
 
     if (isLoading) {
         return (
-            <div className={cn(s.profileCard, {}, [className, s.loading])}>
-                <Loader />
-            </div>
+            <ToggleFeatures
+                feature="isAppRedesigned"
+                on={<ProfileCardRedesignedSkeleton />}
+                off={<ProfileCardDeprecatedLoader />}
+            />
         );
     }
 
     if (error) {
         return (
-            <div className={cn(s.profileCard, {}, [className, s.error])}>
-                <Text
-                    title={t('Authentication failed! Try again.')}
-                    theme={TextTheme.ERROR}
-                    text={t('Try to refresh the page.')}
-                />
-            </div>
+            <ToggleFeatures
+                feature="isAppRedesigned"
+                on={<ProfileCardRedesignedError />}
+                off={<ProfileCardDeprecatedError />}
+            />
         );
     }
 
     return (
-        <div className={cn(s.profileCard, {}, [className])}>
-            <div className={s.header}>
-                <Text title={t('Profile')} />
-                <Button className={s.editBtn} theme={ButtonTheme.OUTLINE}>{t('Edit')}</Button>
-            </div>
-            <div className={s.data}>
-                <Input
-                    value={data?.firstName}
-                    placeholder={t('First name')}
-                    className={s.input}
-                />
-                <Input
-                    value={data?.lastName}
-                    placeholder={t('Last name')}
-                    className={s.input}
-                />
-            </div>
-        </div>
+        <ToggleFeatures
+            feature="isAppRedesigned"
+            on={<ProfileCardRedesigned {...props} />}
+            off={<ProfileCardDeprecated {...props} />}
+        />
     );
 };

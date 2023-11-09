@@ -1,30 +1,18 @@
 import { useEffect, useState } from 'react';
-import { cn } from '@/shared/lib/cn';
-import { Button } from '@/shared/ui/Button';
+import { useTranslation } from 'react-i18next';
+import { Button } from '@/shared/ui/redesigned/Button';
 
-interface BugButtonProps {
-    className?: string
-}
+export const BugButton = () => {
+    const [error, setError] = useState(false);
+    const { t } = useTranslation();
 
-// test component
-export const BugButton = ({ className }:BugButtonProps) => {
-    const [isError, setIsError] = useState(false);
+    const onThrow = () => setError(true);
 
     useEffect(() => {
-        if (isError) throw new Error('Test Error');
-    }, [isError]);
+        if (error) {
+            throw new Error();
+        }
+    }, [error]);
 
-    const handleClick = () => {
-        setIsError((prev) => !prev);
-    };
-    return (
-        <Button
-            onClick={handleClick}
-            className={cn('', {}, [className])}
-        >
-            {/* eslint-disable-next-line i18next/no-literal-string */}
-            {/* eslint-disable-next-line i18next/no-literal-string */}
-            Throw Error
-        </Button>
-    );
+    return <Button onClick={onThrow}>{t('throw error')}</Button>;
 };
