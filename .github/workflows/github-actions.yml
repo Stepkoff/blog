@@ -106,18 +106,6 @@ jobs:
       - name: unit testing
         if: always()
         run: npm run test:unit
-      - name: Setup Pages
-        uses: actions/configure-pages@v2
-        if: always()
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        if: always()
-        with:
-          path: 'reports'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        if: always()
-        uses: actions/deploy-pages@v1
 
   checks:
     runs-on: ubuntu-latest
