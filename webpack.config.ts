@@ -14,9 +14,9 @@ function getApiUrl(mode: BuildMode, apiUrl?: string) {
     return 'http://localhost:8000';
 }
 
-export default (env:BuildEnv) => {
+export default (env: BuildEnv) => {
     // console.log(env);
-    const paths:BuildPaths = {
+    const paths: BuildPaths = {
         entry: path.resolve(__dirname, 'src', 'index.tsx'),
         build: path.resolve(__dirname, 'build'),
         html: path.resolve(__dirname, 'public', 'index.html'),

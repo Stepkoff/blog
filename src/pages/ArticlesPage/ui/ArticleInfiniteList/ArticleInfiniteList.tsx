@@ -8,7 +8,7 @@ import {
     getArticlesPageIsLoading,
     getArticlesPageView,
 } from '../../model/selectors/articlesPageSelectors';
-import {ArticleList} from "@/entities/Article";
+import { ArticleList } from '@/entities/Article';
 
 interface ArticleInfiniteListProps {
     className?: string;

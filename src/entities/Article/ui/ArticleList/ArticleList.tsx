@@ -92,7 +92,7 @@ export const ArticleList = memo((props: ArticleListProps) => {
                             className={cls.card}
                         />
                     ))}
-                     {isLoading && getSkeletons(view)}
+                    {isLoading && getSkeletons(view)}
                 </div>
             }
         />

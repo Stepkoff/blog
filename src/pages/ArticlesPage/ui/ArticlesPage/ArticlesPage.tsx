@@ -16,10 +16,10 @@ import { articlesPageReducer } from '../../model/slices/articlesPageSlice';
 import cls from './ArticlesPage.module.scss';
 import { ArticlePageGreeting } from '@/features/articlePageGreeting';
 import { ToggleFeatures } from '@/shared/lib/features';
-import {ArticlesPageFilters} from '../ArticlesPageFilters/ArticlesPageFilters';
-import {StickyContentLayout} from "@/shared/layouts/StickyContentLayout";
-import {ViewSelectorContainer} from "../ViewSelectorContainer/ViewSelectorContainer";
-import {FiltersContainer} from '../FiltersContainer/FiltersContainer';
+import { ArticlesPageFilters } from '../ArticlesPageFilters/ArticlesPageFilters';
+import { StickyContentLayout } from '@/shared/layouts/StickyContentLayout';
+import { ViewSelectorContainer } from '../ViewSelectorContainer/ViewSelectorContainer';
+import { FiltersContainer } from '../FiltersContainer/FiltersContainer';
 
 interface ArticlesPageProps {
     className?: string;
@@ -60,8 +60,8 @@ const ArticlesPage = (props: ArticlesPageProps) => {
                                 [className],
                             )}
                         >
-                             <ArticleInfiniteList className={cls.list} />
-                             <ArticlePageGreeting /> 
+                            <ArticleInfiniteList className={cls.list} />
+                            <ArticlePageGreeting />
                         </Page>
                     }
                 />
@@ -72,9 +72,9 @@ const ArticlesPage = (props: ArticlesPageProps) => {
                     onScrollEnd={onLoadNextPart}
                     className={classNames(cls.ArticlesPage, {}, [className])}
                 >
-                     <ArticlesPageFilters />
-                     <ArticleInfiniteList className={cls.list} />
-                     <ArticlePageGreeting />
+                    <ArticlesPageFilters />
+                    <ArticleInfiniteList className={cls.list} />
+                    <ArticlePageGreeting />
                 </Page>
             }
         />
